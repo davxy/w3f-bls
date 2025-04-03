@@ -148,7 +148,7 @@ impl<E: EngineBLS> SignatureAggregatorAssumingPoP<E> {
     // }
 
     pub fn verify_using_aggregated_auxiliary_public_keys<
-        RandomOracle: DynDigest + Default + Clone,
+        RandomOracle: DynDigest + FixedOutputReset + Default + Clone,
     >(
         &self,
     ) -> bool {

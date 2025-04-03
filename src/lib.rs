@@ -103,7 +103,7 @@ extern crate alloc;
 extern crate serde;
 
 use core::borrow::Borrow;
-use digest::DynDigest;
+use digest::{DynDigest, FixedOutputReset};
 
 pub mod chaum_pedersen_signature;
 pub mod double;
@@ -292,7 +292,7 @@ pub trait Signed: Sized {
 pub trait ProofOfPossession<E, H, PV>
 where
     E: EngineBLS,
-    H: DynDigest + Default + Clone,
+    H: DynDigest + FixedOutputReset + Default + Clone,
 {
     fn verify(&self, public_key_of_prover: &PV) -> bool;
 }
@@ -300,7 +300,7 @@ where
 /// ProofOfPossion trait which should be implemented by secret
 pub trait ProofOfPossessionGenerator<
     E: EngineBLS,
-    H: DynDigest + Default + Clone,
+    H: DynDigest + FixedOutputReset + Default + Clone,
     PV,
     P: ProofOfPossession<E, H, PV>,
 >
